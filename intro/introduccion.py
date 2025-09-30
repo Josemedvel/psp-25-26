@@ -129,3 +129,41 @@ if "jueves" in menu:
 else:
     print("No hay algo pensado para el jueves")
 
+elementos = [3,4,3,6,7,8,9,7,8,7,0,1,7,6,5,7,4]
+def moda(lista): # O(N²)
+    elem_mas_rep = -1
+    num_max_rep = 0
+    for elem in lista:
+        repetitions = 0
+        for i in lista:
+            if elem == i:
+                repetitions += 1
+                if repetitions > num_max_rep:
+                    num_max_rep = repetitions
+                    elem_mas_rep = i
+    print(elem_mas_rep)
+
+def moda_dicc(lista):
+    diccionario = {}
+    max_reps = 0
+    elem_max_reps = ""
+    for e in lista:
+        if e not in diccionario:
+            diccionario[e] = 1
+        else:
+            diccionario[e] = diccionario[e] + 1
+        if diccionario[e] > max_reps:
+            max_reps = diccionario[e]
+            elem_max_reps = e
+    #print(diccionario)
+    print(elem_max_reps)
+    
+#moda_dicc(elementos)
+
+for k,v in menu.items():
+    print(f"Clave:{k}; Valor:{v}")
+
+del(menu[1])
+print()
+for k,v in menu.items():
+    print(f"Clave:{k}; Valor:{v}")
