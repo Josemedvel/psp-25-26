@@ -129,4 +129,3 @@ if "jueves" in menu:
 else:
     print("No hay algo pensado para el jueves")
 
-
