@@ -7,16 +7,16 @@ class Cuenta:
         self.lock = threading.Lock()
 
     def retirar(self, cantidad):
-        with self.lock:
-            print(f"{threading.current_thread().name} intentando retirar {cantidad}€")
-            if self.saldo >= cantidad:
-                print(f"{threading.current_thread().name} comprobó que hay suficiente saldo ({self.saldo}€)")
-                time.sleep(1)  # Simulamos el tiempo que tarda el cajero
-                self.saldo -= cantidad
-                print(f"{threading.current_thread().name} retiró {cantidad}€. Saldo restante: {self.saldo}€")
-            else:
-                print(f"{threading.current_thread().name} no puede retirar {cantidad}€ (saldo: {self.saldo}€)")
-
+        print(f"{threading.current_thread().name} intentando retirar {cantidad}€")
+        self.lock.acquire()
+        if self.saldo >= cantidad:
+            print(f"{threading.current_thread().name} comprobó que hay suficiente saldo ({self.saldo}€)")
+            #time.sleep(1)  # Simulamos el tiempo que tarda el cajero
+            self.saldo -= cantidad
+            print(f"{threading.current_thread().name} retiró {cantidad}€. Saldo restante: {self.saldo}€")
+        else:
+            print(f"{threading.current_thread().name} no puede retirar {cantidad}€ (saldo: {self.saldo}€)")
+        self.lock.release()
 cuenta = Cuenta(50)
 
 # Dos hilos que intentan retirar dinero a la vez
