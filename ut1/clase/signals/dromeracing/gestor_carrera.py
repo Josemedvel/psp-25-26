@@ -5,7 +5,7 @@ import random
 print(os.getpid())
 
 num_usuarios = 0
-posiciones_dromedarios = [0,0]
+posiciones_dromedarios = [1,1]
 meta = 20
 prob_tropiezo = 0.2
 

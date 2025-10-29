@@ -1,3 +1,4 @@
+
 class Pedido:
     def __init__(self, cliente, items):
         self.cliente = cliente
@@ -7,8 +8,8 @@ class Pedido:
         self.en_prep = False
         self.num_items = len(self.items)
 
-    def annadir_item(self, item):
-        if isinstance(item, Item) and not self.en_prep:
+    def annadir_item(self, item:"Item"):
+        if not self.en_prep:
             self.items.append(item)
             self.num_items += 1
         elif self.en_prep:
