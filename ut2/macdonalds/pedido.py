@@ -8,7 +8,7 @@ class Pedido:
         self.en_prep = False
         self.num_items = len(self.items)
 
-    def annadir_item(self, item:"Item"):
+    def annadir_item(self, item):
         if not self.en_prep:
             self.items.append(item)
             self.num_items += 1
