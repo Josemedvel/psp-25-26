@@ -10,9 +10,13 @@ class Abuela:
     def hacer_galletas(self):
         while True:
             with self.mesa.condicion:
-                if self.mesa.huecos_max - self.mesa.galletas < 10:
+                while (self.mesa.huecos_max - self.mesa.galletas) < 10:
                     self.mesa.condicion.wait()
-                print("Abuela está preparando una galleta")
-                time.sleep(self.tiempo_bandeja)
-                print(f"Abuela ha sacado una bandeja del horno, ya hay {self.mesa.huecos_max - self.mesa.huecos} galletas en la mesa")
-                self.mesa.condicion.notify()
+                    
+            print("Abuela está preparando una bandeja de galletas")
+            time.sleep(self.tiempo_x_bandeja)
+
+            with self.mesa.condicion:
+                self.mesa.annadir_bandeja()
+                print(f"Abuela ha sacado una bandeja del horno, ya hay {self.mesa.galletas} galletas en la mesa")
+                self.mesa.condicion.notify_all()

@@ -13,14 +13,16 @@ class Nieto:
         while True:
             with self.mesa.condicion:
                 print(f"El nieto [{self.nombre}] quiere comer")
-                if self.mesa.galletas == 0:
+                while self.mesa.galletas == 0:
                     self.mesa.condicion.wait()
                 self.mesa.comer_galleta()
-                print(f"El nieto [{self.nombre}] coge una galleta, quedan {self.mesa.galletas} galletas en la mesa")
-                time.sleep(self.tiempo_x_galleta)
-                self.contador_galletas += 1
-                print(f"El nieto [{self.nombre}] se ha comido la galleta nº {self.contador_galletas}")
-                if self.contador_galletas >= self.limite:
-                    print(f"El nieto [{self.nombre}] está lleno, espera un poco antes de seguir comiendo")
-                    time.sleep(self.tiempo_hambre)
-                self.mesa.condicion.notify()
+                self.mesa.condicion.notify_all()
+                
+            print(f"El nieto [{self.nombre}] coge una galleta, quedan {self.mesa.galletas} galletas en la mesa")
+            time.sleep(self.tiempo_x_galleta)
+            self.contador_galletas += 1
+            print(f"El nieto [{self.nombre}] se ha comido la galleta nº {self.contador_galletas}")
+            if self.contador_galletas >= self.limite:
+                print(f"El nieto [{self.nombre}] está lleno, espera un poco antes de seguir comiendo")
+                time.sleep(self.tiempo_hambre)
+                

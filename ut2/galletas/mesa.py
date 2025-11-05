@@ -9,5 +9,5 @@ class Mesa:
     def annadir_bandeja(self):
         self.galletas += 10
 
-    def comer_galleta(self):
-        self.galleta -= 1
+    def coger_galleta(self):
+        self.galletas -= 1
