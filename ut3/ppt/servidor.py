@@ -51,12 +51,10 @@ def juego(cli_1, dir_cli_1, cli_2, dir_cli_2):
         if resultado_turno == -1: #tenemos que sumarle al primer jugador
             puntos["jug_1"] += 1
             if puntos["jug_1"] == 3:
-                fin_juego = True
                 ganador = "Jugador_1"
         elif resultado_turno == 1:
             puntos["jug_2"] += 1
             if puntos["jug_2"] == 3:
-                fin_juego = True
                 ganador = "Jugador_2"
 
         if ganador != "":

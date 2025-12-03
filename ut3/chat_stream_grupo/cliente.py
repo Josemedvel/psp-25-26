@@ -27,7 +27,6 @@ def escribir():
             mensaje = input("")
             if mensaje.strip().lower() in ["stop", "quit"]:
                 sock.close()
-                sys.exit(0)
                 parar = True
             else:
                 sock.send(mensaje.encode())
