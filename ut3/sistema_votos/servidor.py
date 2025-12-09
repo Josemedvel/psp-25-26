@@ -1,7 +1,7 @@
 import socket
 import json
 import threading
-import pprint
+from pprint import pprint
 
 dir_server = ("127.0.0.1", 5000)
 lista_candidatos = ["A", "B", "C", "D"]
@@ -28,6 +28,8 @@ def manejar_cliente(sock, direccion_cliente):
     fin = False
     while not fin:
         mensaje = recibir_mensaje(sock)
+        if mensaje is None: # error de conexion
+            break
         try:
             comando = mensaje.get("comando")
             match comando:
@@ -39,7 +41,6 @@ def manejar_cliente(sock, direccion_cliente):
                         "res" : "OK",
                         "datos" : lista_candidatos
                     }
-                    break
                 case "VOTAR":
                     with lock:
                         if direccion_cliente in dicc_votos: # ya se ha votado
@@ -57,13 +58,13 @@ def manejar_cliente(sock, direccion_cliente):
                             else:
                                 dicc_votos[direccion_cliente] = opcion
                                 pprint(dicc_votos)
-                    json_envio = {
-                        "res" : "OK"
-                    }
-            enviar_mensaje(json_envio)
+                                json_envio = {
+                                    "res" : "OK"
+                                }
+            enviar_mensaje(sock, json.dumps(json_envio))
         except Exception as e:
             print("Error al desempaquetar el json:", e)
-            
+
     sock.close()
 
 

@@ -47,8 +47,7 @@ while comando != "FIN":
             json_envio = {
                 "comando": comando
             }
-            break
-        case "VOTO":
+        case "VOTAR":
             candidato = ""
             while not candidato:
                 candidato = input("Elige un candidato:\t").strip().upper()
@@ -56,14 +55,13 @@ while comando != "FIN":
                 "comando": comando,
                 "candidato": candidato
             }
-            break
         case "FIN":
             json_envio = {"comando": comando}
-            break
         case _:
-            print("Por favor, usa un comando válido ('CANDIDATOS', 'VOTO', 'FIN')")
+            print("Por favor, usa un comando válido ('CANDIDATOS', 'VOTAR', 'FIN')")
             continue
 
-    enviar_mensaje(sock, json_envio)
-    mensaje = recibir_mensaje(sock)
-    gestionar_mensaje_recibido(mensaje)
+    enviar_mensaje(sock, json.dumps(json_envio))
+    if comando != "FIN":
+        mensaje = recibir_mensaje(sock)
+        gestionar_mensaje_recibido(mensaje)
